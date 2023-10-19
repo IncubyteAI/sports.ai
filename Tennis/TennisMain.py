@@ -1,5 +1,5 @@
 #Copyright Tanay Agrawal July 2023
-#Runs and displays the pose estimation module results on a video file
+#Runs and displays the pose estimation module results on a video file - adapted from https://www.youtube.com/watch?v=brwgBf6VB0I
 
 import cv2
 import os
