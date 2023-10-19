@@ -1,3 +1,6 @@
+#Copyright Tanay Agrawal July 2023
+#Pose Detection Module - adapted from https://www.youtube.com/watch?v=brwgBf6VB0I
+
 import cv2
 import mediapipe as mp
 import time
