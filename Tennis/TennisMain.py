@@ -1,3 +1,6 @@
+#Copyright Tanay Agrawal July 2023
+#Runs and displays the pose estimation module results on a video file
+
 import cv2
 import os
 import numpy as np
