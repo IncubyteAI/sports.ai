@@ -1,0 +1,2 @@
+# Please Note:
+The RData folder that contains all the training data (videos and annotations) is not included in this repository due to the amount of memory they occupy. Please ask our team for the dataset separately.
