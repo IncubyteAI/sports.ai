@@ -2,12 +2,14 @@ import numpy as np
 from mediapipe.framework.formats import landmark_pb2
 from mediapipe import solutions
 from mediapipe.tasks.python.vision.pose_landmarker import PoseLandmarkerResult
-def draw_landmarks_on_image(rgb_image: np.ndarray, detection_result: PoseLandmarkerResult) -> np.ndarray:
+RIGHT_ARM_MARKERS = [12, 14, 16, 18, 20, 22]
+def draw_landmarks_on_image(rgb_image: np.ndarray, detection_result: PoseLandmarkerResult, markers: list[int] = range(33)) -> np.ndarray:
     """Draws landmarks from detection_result onto rgb_image.
 
     Args:
         rgb_image (np.ndarray): original image
         detection_result (PoseLandmarkerResult): result from detector.detect(rgb_image)
+        markers (list[int], optional): list of landmark indices to draw. Defaults to range(33), i.e. all landmarks
 
     Returns:
         np.ndarray: annotated image
@@ -22,12 +24,12 @@ def draw_landmarks_on_image(rgb_image: np.ndarray, detection_result: PoseLandmar
         # Draw the pose landmarks.
         pose_landmarks_proto = landmark_pb2.NormalizedLandmarkList()
         pose_landmarks_proto.landmark.extend([
-        landmark_pb2.NormalizedLandmark(x=landmark.x, y=landmark.y, z=landmark.z) for landmark in pose_landmarks
+        landmark_pb2.NormalizedLandmark(x=pose_landmarks[i].x, y=pose_landmarks[i].y, z=pose_landmarks[i].z) for i in markers
         ])
         solutions.drawing_utils.draw_landmarks(
-        annotated_image,
-        pose_landmarks_proto,
-        solutions.pose.POSE_CONNECTIONS,
+            annotated_image,
+            pose_landmarks_proto,
+            solutions.pose.POSE_CONNECTIONS if markers is range(33) else None,
         )
     return annotated_image
 def plot_landmarks(detection_result: PoseLandmarkerResult) -> None:

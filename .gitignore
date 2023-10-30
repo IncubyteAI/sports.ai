@@ -1,5 +1,5 @@
 RData/
-.DS_Store
+**/.DS_Store
 .idea/
 scratch.ipynb
 pose_landmarker*
