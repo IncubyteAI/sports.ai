@@ -1,10 +1,23 @@
 import numpy as np
 from mediapipe.framework.formats import landmark_pb2
-from mediapipe import solutions
+from mediapipe.python import solutions
 from mediapipe.tasks.python.vision.pose_landmarker import PoseLandmarkerResult
+from mediapipe.tasks import python
+from mediapipe.tasks.python import vision
+import os
+def create_detector(model_path: str = 'pose_landmarker_heavy.task') -> vision.PoseLandmarker:
+    assert(os.listdir().count(model_path) == 1)
+    base_options = python.BaseOptions(model_asset_path=model_path)
+    options = vision.PoseLandmarkerOptions(
+        base_options=base_options,
+        output_segmentation_masks=False
+    )
+    return vision.PoseLandmarker.create_from_options(options)
 RIGHT_ARM_MARKERS = [12, 14, 16, 18, 20, 22]
 LEFT_ARM_MARKERS = [x - 1 for x in RIGHT_ARM_MARKERS]
 BOTH_ARM_MARKERS = RIGHT_ARM_MARKERS + LEFT_ARM_MARKERS
+LEFT_HIP = 23
+RIGHT_HIP = 24
 def draw_landmarks_on_image(rgb_image: np.ndarray, detection_result: PoseLandmarkerResult, markers: list[int] = range(33)) -> np.ndarray:
     """Draws landmarks from detection_result onto rgb_image.
 
@@ -31,7 +44,7 @@ def draw_landmarks_on_image(rgb_image: np.ndarray, detection_result: PoseLandmar
         solutions.drawing_utils.draw_landmarks(
             annotated_image,
             pose_landmarks_proto,
-            solutions.pose.POSE_CONNECTIONS if markers is range(33) else None,
+            solutions.pose.POSE_CONNECTIONS if markers == range(33) else None,
         )
     return annotated_image
 def plot_landmarks(detection_result: PoseLandmarkerResult) -> None:
