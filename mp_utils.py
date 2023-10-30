@@ -3,6 +3,8 @@ from mediapipe.framework.formats import landmark_pb2
 from mediapipe import solutions
 from mediapipe.tasks.python.vision.pose_landmarker import PoseLandmarkerResult
 RIGHT_ARM_MARKERS = [12, 14, 16, 18, 20, 22]
+LEFT_ARM_MARKERS = [x - 1 for x in RIGHT_ARM_MARKERS]
+BOTH_ARM_MARKERS = RIGHT_ARM_MARKERS + LEFT_ARM_MARKERS
 def draw_landmarks_on_image(rgb_image: np.ndarray, detection_result: PoseLandmarkerResult, markers: list[int] = range(33)) -> np.ndarray:
     """Draws landmarks from detection_result onto rgb_image.
 
