@@ -34,9 +34,9 @@ class VideoProcessor:
             all_landmarks.append(translated_landmarks)
         return all_landmarks
     def get_stages(self, all_landmarks):
-        return self.model(torch.tensor(all_landmarks)).argmax(dim=1)
+        return self.model(torch.tensor(all_landmarks)).argmax(dim=1).tolist()
     def process(self, path):
-        return self.get_frames(path), self.get_landmarks(path)
+        return self.get_frames(path), self.get_stages(self.get_landmarks(path))
 class ClassificationNet(nn.Module):
     def __init__(self):
         super(ClassificationNet, self).__init__()
