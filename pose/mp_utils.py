@@ -4,6 +4,7 @@ from mediapipe.python import solutions
 from mediapipe.tasks.python.vision.pose_landmarker import PoseLandmarkerResult
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
+from typing import List
 import os
 def create_detector(model_path: str = 'pose_landmarker_heavy.task') -> vision.PoseLandmarker:
     assert(os.listdir().count(model_path) == 1)
@@ -18,7 +19,7 @@ LEFT_ARM_MARKERS = [x - 1 for x in RIGHT_ARM_MARKERS]
 BOTH_ARM_MARKERS = RIGHT_ARM_MARKERS + LEFT_ARM_MARKERS
 LEFT_HIP = 23
 RIGHT_HIP = 24
-def draw_landmarks_on_image(rgb_image: np.ndarray, detection_result: PoseLandmarkerResult, markers: list[int] = range(33)) -> np.ndarray:
+def draw_landmarks_on_image(rgb_image: np.ndarray, detection_result: PoseLandmarkerResult, markers: List[int] = range(33)) -> np.ndarray:
     """Draws landmarks from detection_result onto rgb_image.
 
     Args:

@@ -2,11 +2,9 @@ import torch
 import torch.nn as nn
 from torchvision.io import read_video
 import mediapipe as mp
-import sys
-sys.path.insert(0, '../pose/')
-from pose import create_detector, BOTH_ARM_MARKERS, LEFT_HIP, RIGHT_HIP
-sys.path.insert(0, '../models/')
-from models import *
+from pose.mp_utils import create_detector, BOTH_ARM_MARKERS, LEFT_HIP, RIGHT_HIP
+from models.models import CN_S200_5_D0
+
 
 class VideoProcessor:
     def __init__(self):

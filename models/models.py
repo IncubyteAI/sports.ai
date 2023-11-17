@@ -19,7 +19,7 @@ class CN_S200_5_D0(nn.Module):
     def forward(self, x):
         return self.net(x)
     
-    def load(self, path="/Users/tanayagrawal/sports.ai/models/model_state_dict_CN_S200_5_D0.pt"):
+    def load(self, path="models/model_state_dict_CN_S200_5_D0.pt"):
         self.load_state_dict(torch.load(path))
     
 class CN_S200_5_D25(nn.Module):
@@ -44,7 +44,7 @@ class CN_S200_5_D25(nn.Module):
     def forward(self, x):
         return self.net(x)
 
-    def load(self, path="../models/model_state_dict_CN_S200_5_D25.pt"):
+    def load(self, path="models/model_state_dict_CN_S200_5_D25.pt"):
         self.load_state_dict(torch.load(path))
 
 class CN_S50_4_D0(nn.Module):
@@ -62,3 +62,6 @@ class CN_S50_4_D0(nn.Module):
 
     def forward(self, x):
         return self.net(x)
+    
+    def load(self, path="models/model_state_dict_CN_S200_5_D25.pt"):
+        self.load_state_dict(torch.load(path))
