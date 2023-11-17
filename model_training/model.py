@@ -1,12 +1,17 @@
 import torch
 import torch.nn as nn
-from mp_utils import create_detector, BOTH_ARM_MARKERS, LEFT_HIP, RIGHT_HIP
 from torchvision.io import read_video
 import mediapipe as mp
+import sys
+sys.path.insert(0, '../pose/')
+from pose import create_detector, BOTH_ARM_MARKERS, LEFT_HIP, RIGHT_HIP
+sys.path.insert(0, '../models/')
+from models import *
+
 class VideoProcessor:
     def __init__(self):
         self.detector = create_detector('pose_landmarker_lite.task')
-        self.model = ClassificationNet()
+        self.model = CN_S200_5_D0()
         self.model.load()
     def get_frames(self, path):
         return read_video(path, pts_unit='sec')[0]
@@ -37,21 +42,3 @@ class VideoProcessor:
         return self.model(torch.tensor(all_landmarks)).argmax(dim=1).tolist()
     def process(self, path):
         return self.get_frames(path), self.get_stages(self.get_landmarks(path))
-class ClassificationNet(nn.Module):
-    def __init__(self):
-        super(ClassificationNet, self).__init__()
-        self.net = nn.Sequential(
-            nn.Linear(36, 50),
-            nn.ReLU(),
-            nn.Linear(50, 50),
-            nn.ReLU(),
-            # nn.Linear(50, 50),
-            # nn.ReLU(),
-            nn.Linear(50, 8)
-        )
-
-    def forward(self, x):
-        return self.net(x)
-
-    def load(self, path="model_state_dict.pt"):
-        self.load_state_dict(torch.load(path))

@@ -1,11 +1,11 @@
 import os
 from torchvision.io import read_video
-from mp_utils import create_detector, draw_landmarks_on_image
+from pose.mp_utils import create_detector, draw_landmarks_on_image
 import mediapipe as mp
 import random
 import matplotlib.pyplot as plt
 import numpy as np
-from mp_utils import *
+from pose.mp_utils import *
 import pandas as pd
 from tqdm import tqdm
 import sys
