@@ -1,5 +1,5 @@
-#Copyright Tanay Agrawal July 2023
-#Runs and displays the pose estimation module results on a video file - adapted from https://www.youtube.com/watch?v=brwgBf6VB0I
+# Copyright Tanay Agrawal July 2023
+# Runs and displays the pose estimation module results on a video file - adapted from https://www.youtube.com/watch?v=brwgBf6VB0I
 
 import cv2
 import os
@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 name = "R1ca12"
 
 video_path = f"/Users/tanayagrawal/PycharmProjects/sportsai/Tennis/RData/RTennisServes/{name}.mp4"
-json_file_path = f'/Users/tanayagrawal/PycharmProjects/sportsai/Tennis/RData/RStages-Ann/{name}.mp4.json'
+json_file_path = f"/Users/tanayagrawal/PycharmProjects/sportsai/Tennis/RData/RStages-Ann/{name}.mp4.json"
 
 cap = cv2.VideoCapture(video_path)
 detector = pm.PoseDetector()
@@ -37,7 +37,7 @@ while True:
     if not paused:
         success, img = cap.read()
         if not success:
-            if repeat: 
+            if repeat:
                 cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
                 success, img = cap.read()
             else:
@@ -56,19 +56,19 @@ while True:
         # for i in range(len(wristPoint) - 1):
         #     cv2.line(img, wristPoint[i], wristPoint[i + 1], (0, 0, 255), 2)
 
-            #stage frame stuff
-            # frame_number = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
-            # current_stage = None
+        # stage frame stuff
+        # frame_number = int(cap.get(cv2.CAP_PROP_POS_FRAMES))
+        # current_stage = None
 
-            # for annotation in sorted_annotations:
-            #     start_frame, end_frame = annotation['frameRange']
-            #     if start_frame <= frame_number <= end_frame:
-            #         current_stage = annotation['name']
-            #         break
+        # for annotation in sorted_annotations:
+        #     start_frame, end_frame = annotation['frameRange']
+        #     if start_frame <= frame_number <= end_frame:
+        #         current_stage = annotation['name']
+        #         break
 
-            # if current_stage is not None:
-            #     # Display the current stage on the frame
-            #     cv2.putText(img, current_stage, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+        # if current_stage is not None:
+        #     # Display the current stage on the frame
+        #     cv2.putText(img, current_stage, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
         cv2.imshow(str(video_path), img)
         pTime = time.time()
@@ -76,9 +76,9 @@ while True:
         cv2.imshow(str(video_path), img)
 
     key = cv2.waitKey(200)
-    if key == ord('q'):
+    if key == ord("q"):
         break
-    elif key == ord(' '):
+    elif key == ord(" "):
         paused = not paused
 
     if not repeat and not success:

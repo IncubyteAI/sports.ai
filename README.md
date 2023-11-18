@@ -10,3 +10,5 @@ Pascal Qin for collecting some video data.
 The RData folder that contains all the training data (videos and annotations) is not included in this repository due to the amount of memory they occupy. Please ask our team for the dataset separately.
 ## Removing Spaces
 If the RData file you import is formatted with "Stage X" in folders and filenames instead of "StageX", run `source rm_spaces.sh` to remove these spaces.
+## Pre-commit setup
+To use `pre-commit`, a tool we use to ensure proper formatting and documentation, follow the instructions [here](https://pre-commit.com/).

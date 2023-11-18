@@ -3,7 +3,9 @@ import PoseModule as pm
 
 detector = pm.PoseDetector()
 
-img = cv2.imread('/Users/tanayagrawal/PycharmProjects/sportsai/Tennis/RData/R1ar6/R1ar6_Stage 4_frame_92.png')
+img = cv2.imread(
+    "/Users/tanayagrawal/PycharmProjects/sportsai/Tennis/RData/R1ar6/R1ar6_Stage 4_frame_92.png"
+)
 
 if img is None:
     print("no image")
@@ -15,6 +17,6 @@ else:
     left_leg = detector.find_angle(img, 23, 25, 27, 0, 255, 255)
     right_leg = detector.find_angle(img, 24, 26, 28, 0, 255, 0)
 
-    cv2.imshow('Image', img)
+    cv2.imshow("Image", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
