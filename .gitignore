@@ -2,5 +2,4 @@ RData/
 **/.DS_Store
 .idea/
 scratch.ipynb
-pose_landmarker*
 __pycache__/
