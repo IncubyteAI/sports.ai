@@ -1,0 +1,4 @@
+[tool.interrogate]
+exclude = ["Tennis"]
+ignore-regex = ["^forward$", "^load$"]
+ignore-init-method = true
