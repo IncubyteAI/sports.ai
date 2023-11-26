@@ -6,17 +6,22 @@ import HomeScreen from '../screens/HomeScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import LoginScreen from '../screens/LoginScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import useAuth from '../hooks/useAuth';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { themeColors } from '../assets/theme/index';
+import { Feather } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 export default function AppNavigation() {
     const {user}  = useAuth();
     if(user) {
         return (
             <NavigationContainer>
-                <Stack.Navigator initialRouteName='Home'>
-                    <Stack.Screen name="Home" options={{headerShown: false}} component={HomeScreen} />
+                <Stack.Navigator initialRouteName='UserHome'>
+                    <Stack.Screen name="UserHome" options={{headerShown: false}} component={UserTabs} />
                 </Stack.Navigator>
             </NavigationContainer>
         )
@@ -29,6 +34,43 @@ export default function AppNavigation() {
                     <Stack.Screen name="SignUp" options={{headerShown: false}} component={SignUpScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
+        )
+    }
+
+    function UserTabs() {
+        return (
+            <Tab.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+                headerShown: false,
+                tabBarShowLabel: false,
+                tabBarStyle: { 
+                    elevation: 5,
+                    position: 'absolute',
+                    bottom: 30,
+                    left: 20,
+                    right: 20,
+                    height: 57, 
+                    borderRadius: 50,
+                    backgroundColor: themeColors.whitey,
+                }, 
+                tabBarActiveTintColor: themeColors.blue,
+                tabBarInactiveTintColor: themeColors.black,
+                swipeEnabled: false,
+                
+                tabBarPressColor: 'transparent',
+                tabBarIndicatorStyle: {
+                    backgroundColor: themeColors.blue,
+                    width: 28,
+                    left: 81,
+                    borderRadius: 20,
+                    bottom: 10
+                }
+            }} 
+            >
+                <Tab.Screen name="Home" component={HomeScreen} options={{tabBarIcon: ({ color }) => (<Feather name="home" size={28} color={color} style={{marginBottom: -3, marginRight: -3}} />), }} />
+                <Tab.Screen name="Profile" component={ProfileScreen} options={{tabBarIcon: ({ color }) => (<Feather name="user" size={28} color={color} style={{marginBottom: -3, marginRight: -3}} />) }}/>
+            </Tab.Navigator>
         )
     }
     

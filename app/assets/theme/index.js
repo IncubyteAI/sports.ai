@@ -5,4 +5,5 @@ export const themeColors = {
     blue: '#007EA7',
     whitey: '#FFEEDB',
     mblue: '#79A6B9',
+    gray: '#D3D3D3'
 }

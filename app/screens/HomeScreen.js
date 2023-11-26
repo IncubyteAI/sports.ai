@@ -20,20 +20,8 @@ export default function HomeScreen() {
   }
   return (
     <View style={styles.container}>
-      <SafeAreaView>
+      <SafeAreaView style={{backgroundColor: themeColors.whitey}}>
         <Text style={styles.welcome}>Welcome, {firstName}!</Text>
-
-        <View style={{height: 1.25, backgroundColor: themeColors.black, marginTop: '10%'}} />
-        <Text style={{fontFamily: 'Kamerik-105-Normal', color: themeColors.black, fontSize: 20, marginTop: '2%'}}>Account</Text>
-        <View style={styles.accbuttonrow}>
-          <TouchableOpacity onPress={handleLogout} style={[styles.accbuttons, {width: 180}]}>
-            <Text style={styles.accbuttonstext}>Logout</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleDeleteAccount} style={styles.accbuttons}>
-            <Text style={styles.accbuttonstext}>Delete Account</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{height: 1.25, backgroundColor: themeColors.black, marginTop: '4%'}} />
 
       </SafeAreaView>
     </View>
@@ -49,6 +37,7 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontFamily: "Kamerik-105-Bold",
+    color: themeColors.black,
     fontSize: 25,
   },
   accbuttonrow: {
