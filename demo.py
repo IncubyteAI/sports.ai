@@ -1,4 +1,5 @@
 """A gradio demo for the pose classifier."""
+
 import gradio as gr
 from model_training.video import VideoProcessor
 import torch

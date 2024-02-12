@@ -1,4 +1,5 @@
 """Various potential architectures for the neural network."""
+
 import torch.nn as nn
 import torch
 
