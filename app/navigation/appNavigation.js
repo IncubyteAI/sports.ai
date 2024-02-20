@@ -6,6 +6,7 @@ import HomeScreen from '../screens/HomeScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import LoginScreen from '../screens/LoginScreen';
+import TestScreen from '../screens/TestScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import useAuth from '../hooks/useAuth';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -47,12 +48,14 @@ export default function AppNavigation() {
                 tabBarStyle: { 
                     elevation: 5,
                     position: 'absolute',
-                    bottom: 30,
+                    bottom: 50,
                     left: 20,
                     right: 20,
                     height: 57, 
-                    borderRadius: 50,
+                    borderRadius: 20,
                     backgroundColor: themeColors.whitey,
+                    borderColor: themeColors.black,
+                    borderWidth: 1.5,
                 }, 
                 tabBarActiveTintColor: themeColors.blue,
                 tabBarInactiveTintColor: themeColors.black,
@@ -62,14 +65,16 @@ export default function AppNavigation() {
                 tabBarIndicatorStyle: {
                     backgroundColor: themeColors.blue,
                     width: 28,
-                    left: 81,
+                    left: 52.5,
                     borderRadius: 20,
                     bottom: 10
                 }
             }} 
             >
                 <Tab.Screen name="Home" component={HomeScreen} options={{tabBarIcon: ({ color }) => (<Feather name="home" size={28} color={color} style={{marginBottom: -3, marginRight: -3}} />), }} />
+                <Tab.Screen name="Test" component={TestScreen} options={{tabBarIcon: ({ color }) => (<Feather name="coffee" size={28} color={color} style={{marginBottom: -3, marginRight: -3}} />) }}/>
                 <Tab.Screen name="Profile" component={ProfileScreen} options={{tabBarIcon: ({ color }) => (<Feather name="user" size={28} color={color} style={{marginBottom: -3, marginRight: -3}} />) }}/>
+                
             </Tab.Navigator>
         )
     }

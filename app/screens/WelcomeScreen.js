@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function WelcomeScreen() {
   const navigation = useNavigation(); 
   return (
-    <SafeAreaView style={[styles.god, {backgroundColor: themeColors.whitey}]}>
+    <View style={[styles.god, {backgroundColor: themeColors.whitey}]}>
       <LinearGradient colors={[themeColors.whitey, themeColors.mblue]} locations={[0.0, 0.6]} style={styles.god}>
         <View style={styles.innerContainer}>
           <Text style={styles.header}>SPORTS.AI</Text>
@@ -27,7 +27,7 @@ export default function WelcomeScreen() {
         </View>
 
       </LinearGradient>
-    </SafeAreaView>
+    </View>
   )
 }
 

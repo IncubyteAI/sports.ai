@@ -1,6 +1,12 @@
 {
   "dependencies": {
+    "@react-native-firebase/ml": "^18.8.0",
     "@react-navigation/native": "^6.1.9",
-    "@react-navigation/native-stack": "^6.9.17"
+    "@react-navigation/native-stack": "^6.9.17",
+    "@tensorflow/tfjs-converter": "^4.14.0",
+    "@tensorflow/tfjs-react-native": "^1.0.0"
+  },
+  "devDependencies": {
+    "@wixc3/react-board": "^2.3.0"
   }
 }
