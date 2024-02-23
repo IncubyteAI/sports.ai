@@ -36,7 +36,7 @@ export function AuthProvider({ children }) {
         await fetchFullName();
         console.log("navigating to home");
         router.replace("/home");
-      } else router.replace("/");
+      }
     });
 
     return unsubscribe;

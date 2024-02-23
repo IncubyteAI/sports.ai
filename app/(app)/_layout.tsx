@@ -10,6 +10,6 @@ export default function MainLayout() {
       <Tabs.Screen name="profile" />
     </Tabs>
   ) : (
-    <Redirect href="/login" />
+    <Redirect href="/" />
   );
 }
