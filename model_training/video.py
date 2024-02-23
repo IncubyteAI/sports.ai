@@ -1,4 +1,5 @@
 """Contains the VideoProcessor class, which is used to process videos."""
+
 import torch
 import torch.nn as nn
 from torchvision.io import read_video
