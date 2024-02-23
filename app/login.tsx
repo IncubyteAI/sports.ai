@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./config/firebase";
 import { useRouter } from "expo-router";
+import { g } from "@styles";
 
 export default function LoginScreen() {
   const navigation = useRouter();
@@ -19,94 +20,81 @@ export default function LoginScreen() {
   const [loginError, setLoginError] = useState(false);
 
   const handleSubmit = async () => {
+    console.log("logging in");
     if (email && password) {
       try {
         setLoginError(false);
         await signInWithEmailAndPassword(auth, email, password);
       } catch (err) {
         console.log("got error: ", err.message);
-        if (
-          err.code === "auth/invalid-email" ||
-          err.code === "auth/invalid-login-credentials"
-        ) {
-          setLoginError(true);
-        }
+        setLoginError(true);
       }
     }
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => navigation.back()}
-        style={styles.backbutton}
-      >
+    <View style={g.main}>
+      <TouchableOpacity onPress={() => navigation.back()} style={l.backbutton}>
         <Feather name="corner-up-left" size={30} color={themeColors.black} />
       </TouchableOpacity>
 
-      <Text style={styles.header}>Log in</Text>
+      <Text style={g.h1}>Log in</Text>
 
-      <View style={styles.form}>
-        <View>
-          <Text style={[styles.emailtext]}>Email</Text>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.emailinput}
-              value={email}
-              onChangeText={(value) => {
-                setEmail(value);
-                setLoginError(false);
-              }}
-              cursorColor={themeColors.black}
-            />
-          </View>
+      <View className="self-center">
+        <Text style={[g.h3]}>Email</Text>
+        <View style={l.inputContainer}>
+          <TextInput
+            style={g.input}
+            value={email}
+            onChangeText={(value) => {
+              setEmail(value);
+              setLoginError(false);
+            }}
+            cursorColor={themeColors.black}
+          />
+          {loginError && (
+            <Text style={{ color: "red" }}>Invalid email or password</Text>
+          )}
+        </View>
 
-          <Text style={[styles.emailtext, { marginTop: 22 }]}>Password</Text>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.emailinput}
-              secureTextEntry
-              value={password}
-              onChangeText={(value) => {
-                setPassword(value);
-                setLoginError(false);
-              }}
-              cursorColor={themeColors.black}
-            />
-          </View>
+        <Text style={[g.h3, { marginTop: 22 }]}>Password</Text>
+        <View style={l.inputContainer}>
+          <TextInput
+            style={g.input}
+            secureTextEntry
+            value={password}
+            onChangeText={(value) => {
+              setPassword(value);
+              setLoginError(false);
+            }}
+            cursorColor={themeColors.black}
+          />
+          {loginError && (
+            <Text style={{ color: "red" }}>Invalid email or password</Text>
+          )}
+        </View>
+        <TouchableOpacity style={l.forgotpwd}>
+          <Text style={l.forgotpwd}>Forgot Password?</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity style={styles.forgotpwd}>
-            <Text style={styles.forgotpwd}>Forgot Password?</Text>
+        <TouchableOpacity style={l.loginbutton} onPress={handleSubmit}>
+          <Text style={l.loginbuttontext}>Login</Text>
+        </TouchableOpacity>
+        <View style={l.noacc}>
+          <Text style={l.noacctext}>Don't have an account?</Text>
+          <TouchableOpacity onPress={() => navigation.push("/signup")}>
+            <Text style={l.signuptext}> Sign Up</Text>
           </TouchableOpacity>
-
-          <TouchableOpacity style={styles.loginbutton} onPress={handleSubmit}>
-            <Text style={styles.loginbuttontext}>Login</Text>
-          </TouchableOpacity>
-
-          <View style={styles.noacc}>
-            <Text style={styles.noacctext}>Don't have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.push("/signup")}>
-              <Text style={styles.signuptext}> Sign Up</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const l = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: themeColors.whitey,
-  },
-  header: {
-    color: themeColors.black,
-    fontWeight: "200",
-    fontSize: 35,
-    marginTop: 15,
-    fontFamily: "Kamerik-105-Bold",
-    alignSelf: "center",
   },
   form: {
     backgroundColor: themeColors.whitey,
@@ -114,26 +102,10 @@ const styles = StyleSheet.create({
     marginTop: 0,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
-    alignItems: "center",
   },
   backbutton: {
     marginLeft: 20,
     marginTop: 30,
-  },
-  emailtext: {
-    color: themeColors.black,
-    marginTop: 50,
-    fontWeight: "200",
-    fontSize: 18,
-    marginLeft: 10,
-    fontFamily: "Kamerik-105-Bold",
-  },
-  emailinput: {
-    width: 350,
-    marginLeft: 10,
-    height: 50,
-    borderRadius: 15,
-    fontFamily: "Kamerik-105-Bold",
   },
   forgotpwd: {
     alignItems: "flex-end",

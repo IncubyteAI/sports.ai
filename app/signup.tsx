@@ -9,7 +9,7 @@ import { themeColors } from "@assets/theme";
 import { Feather } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./config/firebase.js";
+import { auth } from "./config/firebase";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { useRouter } from "expo-router";
 

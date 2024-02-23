@@ -4,10 +4,11 @@ import { signOut, deleteUser } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { themeColors } from "@assets/theme";
 import useAuth from "../hooks/useAuth";
+import { useRouter } from "expo-router";
 
 export default function ProfileScreen() {
   const { fullName } = useAuth();
-
+  const navigator = useRouter();
   const handleLogout = async () => {
     await signOut(auth);
   };

@@ -4,13 +4,12 @@ import { themeColors } from "@assets/theme";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { g } from "@styles";
 
 export default function WelcomeScreen() {
   const navigation = useRouter();
   return (
-    <SafeAreaView
-      style={{ backgroundColor: themeColors.whitey, height: "100%" }}
-    >
+    <SafeAreaView style={g.main}>
       <LinearGradient
         colors={[themeColors.whitey, themeColors.mblue]}
         locations={[0.0, 0.6]}
