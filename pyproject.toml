@@ -1,17 +1,12 @@
-[tool.interrogate]
-exclude = ["Tennis"]
-ignore-regex = ["^forward$", "^load$"]
-ignore-init-method = true
-
 [tool.poetry]
 name = "sports-ai"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Daniel Zhu <danielfangzhu@gmail.com>", "Tanay Agrawal"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.11"
 flask = "^3.0.2"
 flask-httpauth = "^4.8.0"
 flask-cors = "^4.0.0"

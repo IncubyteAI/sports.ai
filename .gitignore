@@ -1,4 +1,5 @@
 RData/
+.expo/
 **/.DS_Store
 .idea/
 scratch.ipynb
