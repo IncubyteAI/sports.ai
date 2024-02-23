@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [fullName, setFullName] = useState('');
   const [firstName, setFirstName] = useState('');
-  
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
             const fullNameFromDb = docSnap.data().fullName;
             setFullName(fullNameFromDb);
             setFirstName(fullNameFromDb.split(' ')[0]);
-            
+
           } else {
             console.log('No such document!');
           }
