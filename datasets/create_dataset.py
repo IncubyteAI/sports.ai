@@ -1,4 +1,5 @@
 """creates a dataset of normalized coordinates."""
+
 import os
 from torchvision.io import read_video
 from pose.mp_utils import create_detector, draw_landmarks_on_image
