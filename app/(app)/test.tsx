@@ -12,68 +12,54 @@ import * as FileSystem from "expo-file-system";
     python3 server.py
     curl -u tanay:YanatPlayz -X POST -F "file=@Tennis/RData/Stage6/Stage6_R0rf1.mp4" http://127.0.0.1:5000/predict*/
 }
+async function toServer(uri: string) {
+  console.log(uri);
+  let schema = "http://";
+  let host = "127.0.0.1";
+  let route = "/predict";
+  let port = "5000";
+  let url = "";
+  url = schema + host + ":" + port + route;
+  console.log(url);
+
+  try {
+    const fd = new FormData();
+    fd.append("file", {
+      name: "video.mp4",
+      uri,
+      type: "video/mp4",
+    });
+    const response = await fetch("http://127.0.0.1:5000/predict", {
+      method: "POST",
+      body: fd,
+    });
+    console.log(response);
+    console.log("getting json");
+    const data = await response.json();
+    console.log(data);
+    console.log("Response status:", response.status);
+    console.log("headers: " + response.headers);
+    console.log("stages: " + data.stages);
+  } catch (error) {
+    console.log("error: ", error);
+  }
+}
+async function makePrediction(model, videoURI: string) {
+  console.log("received prediction request");
+  if (model && videoURI) {
+    console.log("Attempting to send: " + videoURI);
+    try {
+      await toServer(videoURI);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  } else {
+    console.log("Model not loaded yet or no video uploaded.");
+  }
+}
 export default function TestScreen() {
   const [model, setModel] = useState(null);
-  const [image, setImage] = useState(null);
-  const uriToBase64 = async (uri) => {
-    let base64 = await FileSystem.readAsStringAsync(uri, {
-      encoding: FileSystem.EncodingType.Base64,
-    });
-    return base64;
-  };
-  const toServer = async (mediaFile) => {
-    console.log(mediaFile.uri);
-    let type = mediaFile.type;
-    let schema = "http://";
-    let host = "127.0.0.1";
-    let route = "/predict";
-    let port = "5000";
-    let url = "";
-    let content_type = "video/mp4";
-    url = schema + host + ":" + port + route;
-    console.log(url);
-
-    try {
-      const fd = new FormData();
-      fd.append("file", {
-        name: "video.mp4",
-        uri: image,
-        type: "video/mp4",
-      });
-      const response = fetch("http://127.0.0.1:5000/predict", mediaFile.uri, {
-        fieldName: "file",
-        // headers: {
-        //   'content-type': content_type,
-        // },
-        httpMethod: "POST",
-        uploadType: FileSystem.FileSystemUploadType.MULTIPART,
-      });
-      console.log("Response status:", response.status);
-      console.log("headers: " + response.frames);
-      console.log("stages: " + response.stages);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-  };
-
-  const makePrediction = async () => {
-    console.log("received prediction request");
-    if (model && image) {
-      console.log("Attempting to send: " + image);
-      try {
-        // Convert the local file URI to a Base64 string
-        const base64 = await uriToBase64(image);
-        await toServer({
-          type: "video",
-          uri: image,
-        });
-      } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-      }
-    } else {
-      console.log("Model not loaded yet or no video uploaded.");
-    }
-  };
+  const [videoURI, setVideoURI] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadModel() {
@@ -98,14 +84,14 @@ export default function TestScreen() {
       quality: 1,
     });
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      setVideoURI(result.assets[0].uri);
     }
   };
   return (
     <View style={styles.container}>
-      {image ? (
+      {videoURI ? (
         <Video
-          source={{ uri: image }}
+          source={{ uri: videoURI }}
           style={{
             width: 225,
             height: 400,
@@ -135,11 +121,11 @@ export default function TestScreen() {
         </TouchableOpacity>
       )}
 
-      <TouchableOpacity onPress={() => setImage(null)}>
+      <TouchableOpacity onPress={() => setVideoURI(null)}>
         <Text style={styles.cleartext}>Clear</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={makePrediction}>
+      <TouchableOpacity onPress={() => makePrediction(model, videoURI)}>
         <Text>Analyze</Text>
       </TouchableOpacity>
     </View>

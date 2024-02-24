@@ -28,17 +28,19 @@ def index():
     return "Hello, {}!".format(auth.current_user())
 
 
-@app.route("/predict")
+@app.route("/predict", methods=["POST"])
 def predict():
     print("Received request")
+    print(request)
     file = request.files["file"]
     file.save("temp.mp4")
 
     frames, stages = processor.process("temp.mp4")
     frames = frames.tolist()
-    response = {"frames": frames, "stages": stages}
+    response = {"stages": stages}
+    print(response["stages"])
     print("Sending response")
-    return json.dumps(response)
+    return response
 
 
 if __name__ == "__main__":
