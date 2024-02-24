@@ -50,6 +50,7 @@ export default function LoginScreen() {
               setEmail(value);
               setLoginError(false);
             }}
+            autoCapitalize="none"
             cursorColor={themeColors.black}
           />
           {loginError && (
@@ -67,6 +68,7 @@ export default function LoginScreen() {
               setPassword(value);
               setLoginError(false);
             }}
+            autoCapitalize="none"
             cursorColor={themeColors.black}
           />
           {loginError && (
