@@ -8,9 +8,9 @@ import { bundleResourceIO } from "@tensorflow/tfjs-react-native";
 import * as FileSystem from "expo-file-system";
 
 {
-  /* tfjs target dir, http-server --cors
-    python3 server.py
-    curl -u tanay:YanatPlayz -X POST -F "file=@Tennis/RData/Stage6/Stage6_R0rf1.mp4" http://127.0.0.1:5000/predict*/
+  /*
+    poetry run python server.py
+    curl -u tanay:YanatPlayz -X POST -F "file=@/Users/tanayagrawal/sports.ai/Tennis/RData/Stage6/Stage6_R0rf1.mp4" http://127.0.0.1:5000/predict */
 }
 async function toServer(uri: string) {
   console.log(uri);

@@ -1,6 +1,8 @@
 """creates a dataset of normalized coordinates."""
 
 import os
+import sys
+sys.path.append('/Users/tanayagrawal/sports-ai')
 from torchvision.io import read_video
 from pose.mp_utils import create_detector, draw_landmarks_on_image
 import mediapipe as mp
@@ -13,7 +15,7 @@ from tqdm import tqdm
 import sys
 
 columns = []
-for i in BOTH_ARM_MARKERS:
+for i in ALL_LIMB_MARKERS:
     columns.extend([f"x{i}", f"y{i}", f"z{i}"])
 columns.append("stage")
 dataset = pd.DataFrame(columns=columns)
@@ -27,15 +29,15 @@ CLASSES = [
     "Stage7",
     "Stage8",
 ]
-# CLASSES = ['Stage1']
+
 detector = create_detector("pose_landmarker_lite.task")
 plotted = 0
 for i, clas in enumerate(CLASSES):
-    for file in os.listdir(os.path.join("RData", clas)):
+    for file in os.listdir(os.path.join("/Users/tanayagrawal/sports-ai/Tennis/RData/", clas)):
         if file.split(".")[-1] == "mp4":
             sys.stdout.write(f"\rProcessing: {file}")
             sys.stdout.flush()
-            video = read_video(os.path.join("RData", clas, file), pts_unit="sec")
+            video = read_video(os.path.join("/Users/tanayagrawal/sports-ai/Tennis/RData/", clas, file), pts_unit="sec")
             # video[0].shape -> (frames, height, width, channels)
             for frame in video[0]:
                 mp_image = mp.Image(
@@ -53,7 +55,7 @@ for i, clas in enumerate(CLASSES):
                     (left_hip.z + right_hip.z) / 2,
                 )
                 translated_landmarks = []
-                for j in BOTH_ARM_MARKERS:
+                for j in ALL_LIMB_MARKERS:
                     translated_landmarks.extend(
                         [
                             pose_landmarks[j].x - center[0],
@@ -71,6 +73,6 @@ for i, clas in enumerate(CLASSES):
                     plt.imshow(annotated_image)
                     plt.title(clas)
 dataset["stage"] = dataset["stage"].astype(int)
-dataset.to_csv("coord_dataset.csv")
+dataset.to_csv("all_coords_dataset.csv")
 print("\nDone processing!")
 plt.show()

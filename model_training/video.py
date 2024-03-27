@@ -4,8 +4,8 @@ import torch
 import torch.nn as nn
 from torchvision.io import read_video
 import mediapipe as mp
-from pose.mp_utils import create_detector, BOTH_ARM_MARKERS, LEFT_HIP, RIGHT_HIP
-from models.models import CN_S200_5_D0
+from pose.mp_utils import *
+from models.models import CN_S200_5_D25
 from typing import List, Tuple
 
 
@@ -14,9 +14,9 @@ class VideoProcessor:
 
     def __init__(self):
         self.detector = create_detector("pose_landmarker_lite.task")
-        self.model = CN_S200_5_D0()
+        self.model = CN_S200_5_D25()
         self.model.load()
-
+    
     def get_frames(self, path: str) -> torch.Tensor:
         """Gets the frames of a video at a given path.
 
@@ -50,7 +50,7 @@ class VideoProcessor:
             (left_hip.z + right_hip.z) / 2,
         )
         translated_landmarks = []
-        for j in BOTH_ARM_MARKERS:
+        for j in ALL_LIMB_MARKERS:
             translated_landmarks.extend(
                 [
                     pose_landmarks[j].x - center[0],
