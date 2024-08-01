@@ -3,6 +3,7 @@ RData/
 .idea/
 scratch.ipynb
 __pycache__/
+.vscode/
 
 # dependencies
 node_modules/

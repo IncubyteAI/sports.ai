@@ -2,11 +2,11 @@
 name = "sports-ai"
 version = "0.1.0"
 description = ""
-authors = ["Daniel Zhu <danielfangzhu@gmail.com>", "Tanay Agrawal"]
+authors = ["Daniel Zhu <danielfangzhu@gmail.com>", "Tanay Agrawal <tanayagrawal31@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.11"
 flask = "^3.0.2"
 flask-httpauth = "^4.8.0"
 flask-cors = "^4.0.0"
@@ -15,7 +15,6 @@ torchvision = "^0.17.0"
 mediapipe = "^0.10.9"
 av = "^11.0.0"
 label-studio = "^1.11.0"
-scikit-learn = "0.24.2"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.3"
