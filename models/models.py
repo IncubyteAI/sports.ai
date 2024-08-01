@@ -34,7 +34,7 @@ class CN_S200_5_D25(nn.Module):
     def __init__(self):
         super(CN_S200_5_D25, self).__init__()
         self.net = nn.Sequential(
-            nn.Linear(66, 200),
+            nn.Linear(36, 200),
             nn.ReLU(),
             nn.Dropout(0.25),
             nn.Linear(200, 200),
@@ -52,7 +52,7 @@ class CN_S200_5_D25(nn.Module):
     def forward(self, x):
         return self.net(x)
 
-    def load(self, path="models/model_state_dict_CN_S200_5_D25_66.pt"):
+    def load(self, path="models/model_state_dict_CN_S200_5_D25.pt"):
         self.load_state_dict(torch.load(path))
 
 
