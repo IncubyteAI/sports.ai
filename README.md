@@ -1,5 +1,5 @@
 # Sports.AI
-Hey 👋 This is the official github repo for sports.ai, an AI-based startup founded by 2 highschool freshmen, Tanay Agrawal (@YanatPlayz) and Daniel Zhu (@devo1ution).
+Hey 👋 This is the official github repo for sports.ai, an AI-based startup founded by 2 highschool freshmen, Tanay Agrawal (@YanatPlayz) and Daniel Zhu (@danielzsh).
 
 Sports.ai is an innovative tool for sports coaching and provides real-time feedback to players. Our technology uses artificial intelligence to analyze player performance through mobile videos and offer personalized insights.
 
