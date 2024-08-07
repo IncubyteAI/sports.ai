@@ -2,10 +2,18 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@styles": ["./app/styles"],
-      "@assets/*": ["./assets/*"],
-      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
+      "@styles": [
+        "./app/styles"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@firebase/auth": [
+        "./node_modules/@firebase/auth/dist/index.rn.d.ts"
+      ]
     }
   },
-  "extends": "expo/tsconfig.base",
+  "esModuleInterop": true,
+  "jsx": "react-native",
+  "extends": "expo/tsconfig.base"
 }
